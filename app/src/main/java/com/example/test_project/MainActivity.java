@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -46,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     private static final int RECORD_REQUEST_CODE = 101;
-    private static final int CAMERA_REQUEST_CODE = 102;
+    private static final int CAMERA_REQUEST = 102;
 
     private static final String CLOUD_VISION_API_KEY = "AIzaSyAd4M0IV9xzjWAM8eEzcPiBbsE_klVnSC8";
 
@@ -57,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
     TextView visionAPIData;
 
     ImageView imageView;
-    Bitmap bitmap;
 
 
     @Override
@@ -92,22 +90,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-    @NonNull
-    private Image getImageEncodeImage (Bitmap bitmap ){
-        Image base64EncodedImage = new Image();
-        // Convert the bitmap to a JPEG
-        // Just in case it's a format that Android understands but Cloud Vision
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 90, byteArrayOutputStream);
-        byte[] imageBytes = byteArrayOutputStream.toByteArray();
-        // Base64 encode the JPEG
-        base64EncodedImage.encodeContent(imageBytes);
-        return base64EncodedImage;
-    }
 
 
-
-    }
 
     public void takePictureFromCamera() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
