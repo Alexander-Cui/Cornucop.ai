@@ -155,21 +155,8 @@ public class MainActivity extends AppCompatActivity {
 
         if (entityAnnotations != null) {
             //This message contains all the objects captured by the API as well as its score
+            //TODO: Make it write all results and confidence into a file
             for (EntityAnnotation entity : entityAnnotations) {
-                message = entity + "    " + entity.getDescription() + " " + entity.getScore();
-                message += "\n";
-            }
-        } else {
-            message = "Nothing Found";
-        }
-        return message;
-    }
-
-    private String formatAnnotation(List<EntityAnnotation> entityAnnotation) {
-        String message = "";
-
-        if (entityAnnotation != null) {
-            for (EntityAnnotation entity : entityAnnotation) {
                 message = message + "    " + entity.getDescription() + " " + entity.getScore();
                 message += "\n";
             }
