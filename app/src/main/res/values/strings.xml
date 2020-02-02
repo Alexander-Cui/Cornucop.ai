@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Test_project</string>
+    <string name="title_activity_response">responseActivity</string>
 </resources>

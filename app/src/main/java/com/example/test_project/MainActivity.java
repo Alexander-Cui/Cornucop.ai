@@ -53,10 +53,11 @@ public class MainActivity extends AppCompatActivity {
     private Bitmap bitmap;
     private String visionAPI = "LABEL_DETECTION";
 
+    private String responseAPI;
     TextView visionAPIData;
 
     ImageView imageView;
-
+    TextView displayResponse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
         Button btnCamera = (Button) findViewById(R.id.btnCamera);
         imageView = (ImageView)findViewById(R.id.imageView);
 
+        displayResponse = (TextView)findViewById(R.id.text);
+
         btnCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
             bitmap = (Bitmap) data.getExtras().get("data");
             imageView.setImageBitmap(bitmap);
-//            callCloudVision(bitmap, feature);
+            callVisionAPI(bitmap, feature);
         }
 
     }
@@ -156,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             protected void onPostExecute(String result) {
-                visionAPIData.setText(result);
+               // visionAPIData.setText(result);
 //                imageUploadProgress.setVisibility(View.INVISIBLE);
             }
         }.execute();
@@ -178,6 +181,13 @@ public class MainActivity extends AppCompatActivity {
         } else {
             message = "Nothing Found";
         }
+
+
+            Intent intent = new Intent(this, responseActivity.class);
+            intent.putExtra("sendmessage", message);
+            startActivity(intent);
         return message;
     }
+
+
 }
